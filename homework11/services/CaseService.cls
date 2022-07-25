@@ -27,12 +27,12 @@ public with sharing class CaseService {
             ids.add(caseItem.Country__c);
         }
 
-        List<AggregateResult> aggregateResults = CountrySelector.getAmountOfClosedCaseForCountry(ids);
+        List<AggregateResult> aggregateResults = CaseSelector.getAmountOfClosedCaseForCountry(ids);
 
         List<Country__c> countries = new List<Country__c>();
 
         for (AggregateResult ar : aggregateResults){
-            countries.add(new Country__c(Id = (Id)ar.get('Status'),
+            countries.add(new Country__c(Id = (Id)ar.get('Country__c'),
                     ClosedCases__c = (Integer)ar.get('countId')));
         }
         update countries;
