@@ -19,7 +19,22 @@ public with sharing class CaseService {
         }
     }
 
-//    public static void updateClosedCasesForCountry(List<Case> cases){
-//
-//    }
+    public static void updateAmountClosedCasesOnCountry(List<Case> cases){
+
+        Set<Id> ids = new Set<Id>();
+
+        for (Case caseItem : cases) {
+            ids.add(caseItem.Country__c);
+        }
+
+        List<AggregateResult> aggregateResults = CountrySelector.getAmountOfClosedCaseForCountry(ids);
+
+        List<Country__c> countries = new List<Country__c>();
+
+        for (AggregateResult ar : aggregateResults){
+            countries.add(new Country__c(Id = (Id)ar.get('Status'),
+                    ClosedCases__c = (Integer)ar.get('countId')));
+        }
+        update countries;
+    }
 }

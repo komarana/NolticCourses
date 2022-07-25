@@ -7,12 +7,9 @@ public with sharing class CaseTriggerHandler {
             when BEFORE_UPDATE {
                 CaseService.updateSuccessMessageForCases(cases);
             }
-//            when AFTER_INSERT {
-//
-//            }
-//            when AFTER_UPDATE {
-//
-//            }
+            when AFTER_UPDATE {
+                CaseService.updateAmountClosedCasesOnCountry(cases);
+            }
         }
     }
 }
