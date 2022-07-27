@@ -1,6 +1,7 @@
 public with sharing class CaseService {
 
     public static Set<Id> getCaseIdWithCountry(List<Case> cases) {
+
         Set<Id> caseIds = new Set<Id>();
 
         for (Case caseItem : cases) {
@@ -22,7 +23,7 @@ public with sharing class CaseService {
         }
     }
 
-    public static void updateAmountClosedCasesOnCountry(List<Case> cases){
+    public static void updateAmountClosedCasesOnCountry(List<Case> cases) {
 
         List<AggregateResult> aggregateResults = CaseSelector.getAmountOfClosedCaseForCountry(getCaseIdWithCountry(cases));
 
