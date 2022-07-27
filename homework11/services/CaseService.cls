@@ -1,14 +1,17 @@
 public with sharing class CaseService {
 
-    public static void updateSuccessMessageForCases(List<Case> cases) {
-
+    public static Set<Id> getCaseIdWithCountry(List<Case> cases) {
         Set<Id> caseIds = new Set<Id>();
 
         for (Case caseItem : cases) {
             caseIds.add(caseItem.Country__c);
         }
+        return caseIds;
+    }
 
-        List<Country__c> countries = CountrySelector.getByCaseIds(caseIds);
+    public static void updateSuccessMessageForCases(List<Case> cases) {
+
+        List<Country__c> countries = CountrySelector.getByCaseIds(getCaseIdWithCountry(cases));
 
         for (Country__c country : countries) {
             for (Case caseItem : cases) {
@@ -21,13 +24,7 @@ public with sharing class CaseService {
 
     public static void updateAmountClosedCasesOnCountry(List<Case> cases){
 
-        Set<Id> ids = new Set<Id>();
-
-        for (Case caseItem : cases) {
-            ids.add(caseItem.Country__c);
-        }
-
-        List<AggregateResult> aggregateResults = CaseSelector.getAmountOfClosedCaseForCountry(ids);
+        List<AggregateResult> aggregateResults = CaseSelector.getAmountOfClosedCaseForCountry(getCaseIdWithCountry(cases));
 
         List<Country__c> countries = new List<Country__c>();
 
