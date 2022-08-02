@@ -14,15 +14,9 @@ public with sharing class OpportunityUtility {
 
         for (Opportunity opportunity : opportunities) {
             opportunity.StageName = stageNew;
-        }
-        update opportunities;
+        } update opportunities;
 
-        List<Opportunity> opportunityResult = new List<Opportunity>(opportunities);
-        return [
-                SELECT Id, Name, StageName
-                FROM Opportunity
-                WHERE Id IN :opportunityResult
-        ];
+        return opportunities;
     }
 
     private static Boolean isValidStages(String stageNew, String stageOld) {
@@ -33,6 +27,6 @@ public with sharing class OpportunityUtility {
         for (Schema.PicklistEntry opportunityStage : opportunityStages) {
             listStages.add(opportunityStage.getValue());
         }
-        return (listStages.contains(stageOld) && listStages.contains(stageNew)) ? true : false;
+        return (listStages.contains(stageOld) && listStages.contains(stageNew));
     }
 }
