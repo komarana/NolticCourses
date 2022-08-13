@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Length conversion</title>
+    <link rel="stylesheet" href="lib/style.css" />
+    <script src="lib/script.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <div class="convert_block_item">
+        <h2>Length conversion</h2>
+        <p>Enter the length value</p>
+        <input type="text" id="val" placeholder="enter a number..." />
+        <div class="convert_from">
+          <select id="valFrom">
+            <option value="0.0254">Inches</option>
+            <option value="0.01">cm</option>
+            <option value="0.3048">Feet</option>
+            <option value="0.9144">Yards</option>
+            <option value="1">Meters</option>
+            <option value="1000">Kilometers</option>
+            <option value="1600.32">Miles</option>
+          </select>
+        </div>
+      </div>
+      <div class="convert_block_item">
+        <div class="convert_to">
+          <select id="valTo">
+            <option value="0.0254">Inches</option>
+            <option value="0.01">cm</option>
+            <option value="0.3048">Feet</option>
+            <option value="0.9144">Yards</option>
+            <option value="1">Meters</option>
+            <option value="1000">Kilometers</option>
+            <option value="1600.32">Miles</option>
+          </select>
+          <div class="convert_result">= 0</div>
+        </div>
+      </div>
+      <div>
+        <p id="error"></p>
+      </div>
+    </div>
+  </body>
+</html>

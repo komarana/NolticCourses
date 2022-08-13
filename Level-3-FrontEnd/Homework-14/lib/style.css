@@ -1,0 +1,23 @@
+/* Add your styles here */
+
+html, body {
+    font-size: 18px;
+    text-align: center;
+    background-color: rgb(56, 120, 124);
+    margin-top: 60px;
+}
+
+select, input {
+    padding: 14px;
+    font-size: 1rem;
+}
+
+.convert_block_item {
+    font-size: 25px;
+}
+
+.convert_result {
+    bottom: 21px;
+    color: rgb(0, 0, 0);
+    font-size: 50px;
+}
