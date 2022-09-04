@@ -1,19 +1,17 @@
 public with sharing class NotificationSenderService {
-    NotificationSender notificationSender;
-    String emailMessage;
+    private NotificationSender notificationSender {get; set;}
+    private String emailMessage {get; set;}
+
 
     public void initNotificationSender(NotificationSender sender, String message) {
 
         emailMessage = message;
-
-        notificationSender = new ObjectNotificationSender();
-        notificationSender.sendNotification(emailMessage);
+        notificationSender = sender;
 
     }
 
     public void executeSend() {
 
-        notificationSender = new EmailNotificationSender();
         notificationSender.sendNotification(emailMessage);
 
     }
