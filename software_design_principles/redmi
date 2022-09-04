@@ -1,0 +1,27 @@
+Create new SOjbect with name Notification__c(select name field as auto number with any format).
+
+Add field Notification_Message__c - type Text Area(long)
+
+Create an interface named NotificationSender Define void method named sendNotification(String notificationMessage) in NotificationSender interface
+
+Create a class named EmailNotificationSender which is implementing NotificationSender interface. This method should be able to send email message with any subject, body as notificationMessage parameter to the current user's email address.
+
+Create a class named ObjectNotificationSender which is implementing NotificationSender interface. This method should be able to create new record of Notification__c sObject type with populated Message__c field from notificationMessage parameter.
+
+Create a class named NotificationSenderService.
+
+Create a void method initNotificationSender(NotificationSender sender, String message) which will store defined values in private properties.
+
+Create a void method executeSend() which is executing sendNotification method of previously saved NotificationSender instance.
+
+Check if the following code is sending an email to you and create a record of Notification__c type
+
+List<NotificationSender> senders = new List<NotificationSender> { new EmailNotificationSender(), new ObjectNotificationSender() };
+
+NotificationSenderService service = new NotificationSenderService();
+
+for (NotificationSender sender : senders) {
+
+    service.initNotificationSender(sender, 'Hello my friend'); service.executeSend();
+
+}
