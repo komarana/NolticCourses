@@ -10,5 +10,11 @@ public with sharing class EmailNotificationSender implements NotificationSender 
 
         Messaging.sendEmail(new Messaging.SingleEmailMessage[] { message });
 
+        Map<String,System.OrgLimit> limitsMap = OrgLimits.getMap();
+        System.OrgLimit apiRequestsLimit = limitsMap.get('SingleEmail');
+        System.debug('Limit Name: ' + apiRequestsLimit.getName());
+        System.debug('Usage Value: ' + apiRequestsLimit.getValue());
+        System.debug('Maximum Limit: ' + apiRequestsLimit.getLimit());
+
     }
 }
