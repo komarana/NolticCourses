@@ -12,10 +12,9 @@ private with sharing class ChangeAccountNamesBatchTest {
 
     @IsTest
     public static void testChangeAccountNamesBatch() {
-        String query = 'SELECT Name FROM Account';
 
         Test.startTest();
-            ChangeAccountNamesBatch changeAccountNamesBatch = new ChangeAccountNamesBatch(query);
+            ChangeAccountNamesBatch changeAccountNamesBatch = new ChangeAccountNamesBatch();
             Id batchId = Database.executeBatch(changeAccountNamesBatch);
         Test.stopTest();
 

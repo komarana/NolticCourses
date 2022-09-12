@@ -22,6 +22,7 @@ private with sharing class MorningCaseCreatorSchedulerTest {
         System.assertEquals(MorningCaseCreatorScheduler.expression, ct.CronExpression);
         System.assertEquals('2022-09-10 07:00:00', String.valueOf(ct.NextFireTime));
 
+
     }
 
 }

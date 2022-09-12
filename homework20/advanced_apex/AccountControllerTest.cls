@@ -9,7 +9,8 @@ private with sharing class AccountControllerTest {
             AccountController.createAccountFuture(testAccountName);
         Test.stopTest();
 
-        List<Account> accounts = [SELECT Id FROM Account WHERE Name =: testAccountName];
+        List<Account> accounts = [SELECT Id, Name FROM Account WHERE Name =: testAccountName];
         System.assertEquals(1, accounts.size());
+        System.assertEquals(accounts[0].Name, 'Test Name');
     }
 }

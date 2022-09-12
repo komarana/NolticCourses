@@ -6,8 +6,7 @@ public with sharing class CreateAccountQueueable implements Queueable {
     }
 
     public void execute(QueueableContext qc) {
-        Account account = new Account(Name = name);
-        insert account;
+        insert new Account(Name = name);
     }
 }
 

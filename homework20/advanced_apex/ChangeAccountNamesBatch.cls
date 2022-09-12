@@ -1,28 +1,26 @@
 public with sharing class ChangeAccountNamesBatch implements Database.Batchable<SObject>, Database.Stateful {
-    private final String q;
+
     public Integer recordsProcessed = 0;
 
-    public ChangeAccountNamesBatch(String query) {
-        q = query;
-    }
-
     public Database.QueryLocator start(Database.BatchableContext bc) {
-        return Database.getQueryLocator(q);
+        return Database.getQueryLocator('SELECT Name FROM Account');
     }
 
     public void execute(Database.BatchableContext bc, List<Account> scope) {
-        List<Account> accountsToUpdate = new List<Account>();
-        for (Account accItem : scope){
-            accItem.Name = accItem.Name + ' Batch Processed';
-            accountsToUpdate.add(accItem);
-            recordsProcessed = recordsProcessed + 1;
+
+        for (Account accItem : scope) {
+            if (!accItem.Name.contains('Batch Processed')) { //з Set(Id) не вийшло, кожного разу транзакція обнуляється
+                accItem.Name = accItem.Name + ' Batch Processed';
+                recordsProcessed = recordsProcessed + 1;
+            }
         }
-        update accountsToUpdate;
+        update scope;
     }
 
     public void finish(Database.BatchableContext bc) {
+
         AsyncApexJob asyncApexJob = [
-                SELECT Id, Status, NumberOfErrors, JobItemsProcessed, TotalJobItems
+                SELECT Id, Status, NumberOfErrors, TotalJobItems
                 FROM AsyncApexJob
                 WHERE Id = :bc.getJobId()
         ];
@@ -41,4 +39,5 @@ public with sharing class ChangeAccountNamesBatch implements Database.Batchable<
 
 }
 
-//Id batchId = Database.executeBatch(new ChangeAccountNamesBatch('SELECT Name FROM Account'));
+//Id batchId = Database.executeBatch(new ChangeAccountNamesBatch());
+
