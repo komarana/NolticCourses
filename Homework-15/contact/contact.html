@@ -1,0 +1,11 @@
+<template>
+    <template if:true={contact}>
+        <p>Name: {contact.Name}</p>
+        <p>Email:
+            <lightning-formatted-email value={contact.Email}></lightning-formatted-email>
+        </p>
+        <p>Phone:
+            <lightning-formatted-phone value={contact.Phone}></lightning-formatted-phone>
+        </p>
+    </template>
+</template>
